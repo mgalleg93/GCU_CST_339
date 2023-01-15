@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+		<meta charset="UTF-8">
+		<title>Register</title>
+		</head>
+	<body>
+		<div layout:fragment="content">
+			<div class="container">
+				<div class="row">
+					<form action="#" th:action="@{doRegistration}" th:object="${registrationModel}" method="post">
+						<div class="col-md-6 mb-3">
+							<label for="firstName" class="form-label">First Name</label>
+							<input type="text" class="form-control" th:field="*{fName}" placeholder="John">
+							<span style="color: red" th:if="${#fields.hasErrors('fName')}" th:errors="*{fName}"></span>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="lastName" class="form-label">Last Name</label>
+							<input type="text" class="form-control" th:field="*{lName}" placeholder="Doe">
+							<span style="color: red" th:if="${#fields.hasErrors('lName')}" th:errors="*{lName}"></span>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="email" class="form-label">Email address</label>
+							<input type="email" class="form-control" th:field="*{email}" placeholder="name@example.com">
+							<span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="phone" class="form-label">Phone Number</label>
+							<input type="text" class="form-control" th:field="*{phone}" placeholder="(602) 555-1234)">
+							<span style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="username" class="form-label">User Name</label>
+							<input type="text" class="form-control" th:field="*{username}" >
+							<span style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="password" class="form-label">Password</label>
+							<input type="password" class="form-control" th:field="*{password}">
+							<span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+						</div>
+
+						<div >
+							<button class="btn btn-primary" style="margin: 20px;" type="submit" value="Submit">Submit</button>
+						</div>
+
+						<!-- <table>
+							<tr>
+								<td>User Name:</td><td><input type="text" th:field="*{username}"></td><td><h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">User Name Error</h5></td>
+							</tr>
+							<tr>
+								<td>Password:</td><td><input type="password" th:field="*{password}"></td><td><h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">User Name Error</h5></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" value="Submit" /></td>
+							</tr>
+						</table> -->
+
+
+						<div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+						<div th:each="err : ${#fields.errors('*')}">
+							<span style="color: red" th:text="${err}" class="fieldError"></span>
+						</div>
+					</form>
+				</div>
+				<p>Have an account <a href="/login/">log in</a></p>
+			</div>
+		</div>
+
+	</body>
+</html>

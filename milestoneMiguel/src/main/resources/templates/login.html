@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+		<meta charset="UTF-8">
+		<title>Login</title>
+	</head>
+	<body>
+		<div layout:fragment="content">
+			<div class="container">
+					<div class="row" style="text-align: center;">
+						<form action="#" th:action="@{doLogin}" th:object="${loginModel}" method="post">
+							<div class="col-md-12 mb-3">
+								<label for="username" class="form-label">User Name</label>
+								<input type="text" class="form-control" th:field="*{username}" >
+								<span style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+							</div>
+							<div class="col-md-12 mb-3">
+								<label for="password" class="form-label">Password</label>
+								<input type="password" class="form-control" th:field="*{password}">
+								<span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							</div>
+							<div >
+								<button class="btn btn-primary" style="margin: 20px;" type="submit" value="Submit">Submit</button>
+							</div>
+							<!-- <table>
+								<tr>
+									<td>User Name:</td><td><input type="text" th:field="*{username}"></td><td><h5 style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">User Name Error</h5></td>
+								</tr>
+								<tr>
+									<td>Password:</td><td><input type="password" th:field="*{password}"></td><td><h5 style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">User Name Error</h5></td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" value="Submit" /></td>
+								</tr>
+							</table> -->
+							<div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+							<div th:each="err : ${#fields.errors('*')}">
+								<span style="color: red" th:text="${err}" class="fieldError"></span>
+							</div>
+						</form>
+					</div>
+			</div>
+			<p>New User click <a href="/login/register">here</a></p>
+		</div>
+	</body>
+</html>
